@@ -1,49 +1,69 @@
+const { errorMonitor } = require("events");
+const { json } = require("express");
+const express = require("express");
+const app = express();
+app.use(express.json());
+const { mw } = require("./midlleware");
 
+const { postData } = require("./postRoute");
 
-const { errorMonitor } = require('events')
-const { json } = require('express')
-const express=require('express')
-const app=express()
-app.use(express.json())
-const {mw}=require('./midlleware')
+const fs = require("fs");
 
-const {postData}=require('./postRoute')
+// app.use(mw)
+app.get("/getdata", (req, res) => {
+  let data = fs.readFileSync("./text.json", "utf-8");
+  res.send(data);
+});
 
-const fs=require('fs')
+app.use("/", postData);
 
-app.use(mw)
-app.get('/getdata',(req,res)=>{
-    let data=fs.readFileSync('./text.json',"utf-8")
-    res.send(data)
-})
+app.delete("/deletedata/:id", (req, res) => {
+  const ID = Number(req.params.id);
 
-app.use("/",postData)
+  let data = fs.readFileSync("./text.json", "utf-8");
+  data = JSON.parse(data);
 
+  data.data = data.data.filter((elm) => elm.id != ID);
 
-app.delete('/deletedata/:id',(req,res)=>{
- 
-     const ID= Number(req.params.id)
-   
-      let data=fs.readFileSync('./text.json',"utf-8")
-       data=JSON.parse(data)
+  fs.writeFileSync("./text.json", JSON.stringify(data));
 
-       data.data=data.data.filter((elm)=>elm.id!=ID)
- 
-       
-        fs.writeFileSync('./text.json',JSON.stringify(data))
-        
-     res.send('ok')
-      
-})
+  res.send("ok");
+});
 
+app.put("/change/:id", (req, res) => {
+  const ID = Number(req.params.id);
+  const {name,id,age,height} = req.body;
 
+  let obj={
+    name:name,
+    id:id,
+    age:age,
+    height:height
+  }
+  console.log(name,"namee")
 
-app.listen(8080,()=>{
-    try{
-console.log('server standby at 8080')
-    }
-    catch(error){
-        console.log(error)
-    }
-})
+  let data = fs.readFileSync("./text.json", "utf-8");
+  data = JSON.parse(data);
 
+  data.data = data.data.map((elm) => {
+    // if(elm.id===ID){
+    //     return elm=obj
+    // }
+    // else{
+    //     return elm
+    // }
+  
+    return elm.id===ID?elm=obj:elm
+  });
+
+  fs.writeFileSync("./text.json",JSON.stringify(data))
+  res.send('ok')
+});
+
+app.listen(8080, () => {
+  try {
+    console.log("server standby at 8080");
+  } catch (error) {
+    console.log(error);
+  }
+});
