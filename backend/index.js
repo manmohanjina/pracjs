@@ -11,8 +11,19 @@ const fs = require("fs");
 
 // app.use(mw)
 app.get("/getdata", (req, res) => {
-  let data = fs.readFileSync("./text.json", "utf-8");
+  let sum=0;
+  for(let i=0;i<500;i++){
+    sum+=i
+  }
+  let data = fs.readFileSync("./text.json", "utf-8",(err,tes)=>{
+     
+    console.log(tes)
+  });
+   
+ 
+  console.log(sum)
   res.send(data);
+  
 });
 
 app.use("/", postData);
@@ -59,6 +70,11 @@ app.put("/change/:id", (req, res) => {
   fs.writeFileSync("./text.json",JSON.stringify(data))
   res.send('ok')
 });
+
+
+
+
+
 
 app.listen(8080, () => {
   try {
