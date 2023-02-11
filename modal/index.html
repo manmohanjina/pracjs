@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #container{
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+       
+        background-color: rgba(0, 0, 0, 0.4)
+      
+
+    }
+    .modal{
+        border: 1px solid red;
+        margin: auto;
+        align-content: center;
+        background-color: rgb(96, 101, 101);
+    
+        margin-top: 15%;
+        width: 50%;
+        height: 50%;
+     
+    }
+    .close{
+        font-size: xx-large;
+        font-weight: bolder;
+        color: black;
+        background-color: blue;
+        border: 10px solid red;
+    }
+    .close:hover{
+        font-size: 100%;
+    }
+</style>
+<body>
+    <button onclick="hello()" >open</button>
+    <div>
+    hello wordl
+    </div>
+    
+    <div id="container"  >
+ 
+        <div class="modal" >
+<h2 class="close" >Xsdfdsafdsf</h2>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+
+const modalOpen=()=>{
+    let modal=document.getElementById('container')
+    modal.style.display='block';
+
+
+    let close=document.getElementsByClassName('close')
+   
+
+    close[0].onclick= function(){
+        modal.style.display='none'
+    }
+
+    window.onclick=function(event){
+        if(event.target==modal){
+            modal.style.display='none'
+        }
+
+        let box=document.createElement('div')
+        let name=document.createElement('h1')
+        name.innerHTML='MAnsih'
+        let age=document.createElement('h3')
+        age.innerHTML=34
+       
+box.append(name,age)
+
+      let t=document.querySelector('.modal')
+
+      console.log(t)
+  
+        t.append(box)
+
+
+    }
+}
+
+
+function hello(){
+    modalOpen()
+}
+
+</script>
