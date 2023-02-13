@@ -1,12 +1,13 @@
 
-
+const {mw}=require('./midlleware')
 const express=require('express')
+
 
 const postData=express.Router()
 postData.use(express.json())
 const fs=require('fs')
 
-
+postData.use(mw)
 postData.post('/addData',(req,res)=>{
     const payload=req.body
 
