@@ -42,3 +42,27 @@ function printname(a, b) {
 
 // let x= printname.bind(obj,"bind method")
 // x()
+
+
+let arr=[1,2,3]
+let arr2=[3,4,5]
+let obj1={
+    name:"manish"
+}
+let obj3={
+    name:"jina"
+}
+ 
+function dispalay(...i){
+    
+    console.log(i)
+
+    setTimeout(()=>{
+console.log(this[i])
+    },i*1000)
+}
+ 
+for(let i=0;i<3;i++){
+    dispalay.apply(arr,[i])
+}
+

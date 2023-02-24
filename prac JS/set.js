@@ -56,18 +56,17 @@ const arr = [1, 2, 3, 4, 5];
 //     }
 //   }
 // }
-let str = "key,value,pair,javascript";
-let arr1 = str.split(",");
-function rec(arr, i = 0, obj = {}) {
-  console.log(i, arr[i]);
-  if (i == arr.length) {
-    console.log("reached the end and returning empty obj");
-    return obj;
-  } else {
-    obj[arr[i]] = rec(arr, i + 1);
-    console.log("return value is a obj");
-    return obj;
-  }
+// let str = "key,value,pair,javascript";
+// let arr1 = str.split(",");
+// function rec(arr, i = 0, obj = {}) {
+//   console.log(i, arr[i]);
+//   if (i == arr.length) {
+//     console.log("reached the end and returning empty obj");
+//     return obj;
+//   } else {
+//     obj[arr[i]] = rec(arr, i + 1);
+//     console.log("return value is a obj");
+//     return obj;
+//   }
 
-}
-console.log(rec(arr1))
+// }
