@@ -44,25 +44,34 @@ function printname(a, b) {
 // x()
 
 
-let arr=[1,2,3]
+
+// let obj1={
+//     name:"manish"
+// }
+// let obj3={
+//     name:"jina"
+// }
+
+let arr=[1,2,3,4,5,6,7,8,9,10]
 let arr2=[3,4,5]
-let obj1={
-    name:"manish"
-}
-let obj3={
-    name:"jina"
-}
  
-function dispalay(...i){
-    
+function dispalay(i){
+    let j=i
     console.log(i)
+     
+    
+  
+
+    console.log('this is j',j)
+
 
     setTimeout(()=>{
-console.log(this[i])
-    },i*1000)
+console.log(this[j])///1
+    },i*1000)//0
 }
  
-for(let i=0;i<3;i++){
+for(let i=0;i<10;i++){
+
     dispalay.apply(arr,[i])
 }
 

@@ -8,12 +8,27 @@ const app = express();
 const jwt = require("jsonwebtoken");
 app.use(express.json());
 
+//protected route via jwt
+
+app.get("/", (req, res) => {
+const token = req.params
+  console.log(token);
+  res.send('ok')
+  // jwt.verify(token, "masai", (err, decode) => {
+  //   if (err) {
+  //     console.log(err);
+  //     res.send({ err: "invalid token" });
+  //   } else {
+      
+  //    res.send('...data')
+  //   }
+
+  // });
+});
 
 app.use(middlewareValidator);
 app.post("/login", async (req, res) => {
   try {
-    const token = jwt.sign({ course: "backend" },'masai');
-
     const { email, password } = req.body;
     const isUserpresent = await AuthModel.find({
       email: email,
@@ -21,17 +36,16 @@ app.post("/login", async (req, res) => {
     });
 
     if (isUserpresent.length == 0) {
-        console.log(token,'tok')
       res.send({ err: "no user found" });
     } else {
-      res.send(isUserpresent);
+      const token = jwt.sign({ course: "backend" }, "masai");
+      res.send({ succ: token });
     }
   } catch (error) {
     console.log(error);
     res.send("err");
   }
 });
-
 
 app.post("/userauth", async (req, res) => {
   try {
