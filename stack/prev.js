@@ -1,3 +1,6 @@
+//finding a no smaller to it 's left and right 
+
+
 
 const arr = [1, 6, 4, 10, 2, 5];
 //ans -1,1,1,4,1,2

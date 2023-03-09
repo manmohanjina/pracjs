@@ -4,26 +4,28 @@ const { middlewareValidator } = require("./middleware/mw");
 const { AuthModel } = require("./model/authmodel");
 require("dotenv").config();
 const app = express();
+const bcrypt = require('bcrypt');
 
 const jwt = require("jsonwebtoken");
+const { Authenticate } = require("./middleware/authenticateMW");
 app.use(express.json());
 
 //protected route via jwt
-
+// app.use(Authenticate);
 app.get("/", (req, res) => {
-const token = req.params
-  console.log(token);
-  res.send('ok')
-  // jwt.verify(token, "masai", (err, decode) => {
-  //   if (err) {
-  //     console.log(err);
-  //     res.send({ err: "invalid token" });
-  //   } else {
-      
-  //    res.send('...data')
-  //   }
+  // const token =req.headers.authorization
 
-  // });
+  //   jwt.verify(token, "masai", (err, decode) => {
+  //     if (err) {
+  //       console.log(err);
+  //       res.send({ err: "invalid token" });
+  //     } else {
+
+  //      res.send('...data')
+  //     }
+
+  //   });
+  res.send("ok");
 });
 
 app.use(middlewareValidator);
@@ -49,11 +51,21 @@ app.post("/login", async (req, res) => {
 
 app.post("/userauth", async (req, res) => {
   try {
-    const payload = req.body;
+    const { email, password } = req.body;
 
-    const signup = await new AuthModel(payload);
-    signup.save();
-    res.send({ msg: "registering user success" });
+    const hashedpass=bcrypt.hash(password,8,async(err,hashed)=>{
+      if(err){
+        console.log(err)
+        res.send({'msg':"tech issue"})
+      }
+      else{
+        const signup = await new AuthModel({email, password:hashed});
+        await signup.save();
+        res.send({ msg: "registering user success" });
+      }
+    })
+
+    
   } catch (error) {
     console.log("error occured while sign-Up");
   }

@@ -1,8 +1,12 @@
-const arr = [1, 0, 1, 0, 1, 0];
+const arr = [1,2,3,4,5,6];
 
-let left = 0;
-let right = arr.length - 1;
-
-
-
-console.log(arr.flat(-1))
+ 
+//print the arr recursivly;
+let i=0
+async function print(arr,n){
+     
+     console.log(arr[i])
+if(i===arr.length)return
+    print(arr,n,i+1)
+}
+print(arr,arr.length,i)

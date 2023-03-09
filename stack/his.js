@@ -50,8 +50,8 @@ function Maxhisto(arr, n) {
   let max = 0;
   let nextS = NextSmaller(arr, n);
   let prevS = prevSmaller(arr, n);
-  console.log(nextS, "nextSmaller");
-  console.log(prevS, "smaller");
+  // console.log(nextS, "nextSmaller");
+  // console.log(prevS, "smaller");
   for (let i = 0; i < n; i++) {
     let area = (nextS[i] - prevS[i] - 1) * arr[i];
 
