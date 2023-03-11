@@ -11,5 +11,14 @@
     name:"manish",
     age:26
  }
+ //everything in ts is just declaring types;
+
+  
+ const bool:boolean=false;
+  
+
+
+ //types is ts number ,string ,boolean, null, undefined ,void, object, array, tupple, any and never;
+ 
  
  
