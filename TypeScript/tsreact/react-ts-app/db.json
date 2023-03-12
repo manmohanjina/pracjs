@@ -1,38 +1,13 @@
 {
   "todo": [
     {
-      "id": 1,
-      "title": "learn TS",
-      "status": false
+      "id": 1678640173564,
+      "titel": "learn  react ",
+      "status": true
     },
     {
-      "id": 2,
-      "title": "learn Chakra",
-      "status": false
-    },
-    {
-      "id": 3,
-      "title": "learn React.js",
-      "status": false
-    },
-    {
-      "id": 1678552641621,
-      "titel": "first ip",
-      "status": false
-    },
-    {
-      "id": 1678552673917,
-      "titel": "first ip",
-      "status": false
-    },
-    {
-      "id": 1678553457426,
-      "titel": "inital Tough",
-      "status": false
-    },
-    {
-      "id": 1678553472478,
-      "titel": "but i wil get it",
+      "id": 1678640180020,
+      "titel": "learn  chakra",
       "status": false
     }
   ]

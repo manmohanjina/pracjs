@@ -8,12 +8,19 @@ import TodoItem from "./TodoItem"
 export default function Todoapp(){
 
 
-
+const [count,setCount]=useState<number>(0)
     const [data,setdata]=useState<TodoType []>([])
   
 
     const addresTodo=(todo:TodoType)=>{
         setdata([...data,todo])
+    }
+
+    const toggle=(single:TodoType)=>{
+     
+        const filterdata=data.filter((elm)=>elm.id!==single.id)
+
+        setdata([single,...filterdata])
     }
       
 
@@ -22,6 +29,15 @@ useEffect(()=>{
     setdata(res)
  })
 },[])
+
+const handelDel=(delres:TodoType,id:number)=>{
+  
+    const filterdata=data.filter((elm)=>elm.id!==id)
+
+    setdata(filterdata)
+    
+    
+}
 
 
 
@@ -33,7 +49,7 @@ useEffect(()=>{
  <TodoInput fn={addresTodo} />
 
 {
-    data&&data.map((elm)=><TodoItem key={elm.id} {...elm} />)
+    data&&data.map((elm)=><TodoItem updateDel={handelDel} toggle={toggle}  key={elm.id} {...elm} />)
 }
 
     </div>

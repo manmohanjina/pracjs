@@ -2,7 +2,7 @@ import { type } from "os"
 import React, { useState } from "react"
 import { addTodo } from "../api"
 import { TodoType } from "../constant"
-import TodoItem from "./TodoItem"
+
 
 
 type todoipProp={
