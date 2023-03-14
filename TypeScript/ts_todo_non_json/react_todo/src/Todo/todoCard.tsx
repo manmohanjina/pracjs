@@ -1,14 +1,15 @@
-type dataprops = {
+ export type dataprops = {
   id?: number;
   titel: string;
   status: string;
 };
 type props = {
   elm: dataprops;
-  fn: (id: number|undefined ) => void;
+  fn: (el:dataprops ) => void;
+  del:(id:number|undefined)=>void
 };
 
-export default function TodoCard({ elm, fn }: props) {
+export default function TodoCard({ elm, fn,del }: props) {
   return (
     <>
       <div
@@ -25,7 +26,10 @@ export default function TodoCard({ elm, fn }: props) {
         </div>
         <div>
           <h4>{elm.status}</h4>
-          <button onClick={() => fn(elm?.id)}>Toggle</button>
+          <button onClick={() => fn(elm)}>Toggle</button>
+        </div>
+        <div>
+          <button onClick={()=>del(elm.id)} >del</button>
         </div>
       </div>
     </>

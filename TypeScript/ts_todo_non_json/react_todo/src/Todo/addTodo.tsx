@@ -1,7 +1,7 @@
 import { upload } from "@testing-library/user-event/dist/upload";
 import { log } from "console";
 import React, { useState } from "react";
-import TodoCard from "./todoCard";
+import TodoCard, { dataprops } from "./todoCard";
 
 export type todo = {
   id?: number;
@@ -16,7 +16,7 @@ export default function PostTodo() {
   });
 
   const [singleTodo, setSingleTodo] = useState<todo[]>([
-    { id: 1, titel: "hello world", status: "false" },
+    { id: 1, titel: "hello world", status: "pending" },
   ]);
 
   const handelChange = (
@@ -36,17 +36,29 @@ export default function PostTodo() {
     //setTodo({ id: 0, titel: "", status: "" });
   };
 
-  const handelToggle = (ids: number | undefined) => {
+  const handelToggle = (el: dataprops) => {
+    let update = singleTodo.filter((elm) => elm.id !== el.id);
 
-    let update=singleTodo.filter((elm)=>elm.id==ids)
+    let single = singleTodo.filter((elm) => elm.id === el.id);
 
-    let newdata=update[0].status=="complete"?"pending":"complete"
+    let status = el.status === "completed" ? "pending" : "completed";
 
-    let res=singleTodo.filter((elm)=>elm.id!==ids)
+    let up = { ...single[0], status: status };
 
- setSingleTodo([...singleTodo,...res])
-
+    setSingleTodo([...update, up]);
   };
+
+
+
+  const handelDel=(id:number|undefined)=>{
+     
+    const filter=singleTodo.filter((elm)=>elm.id!==id)
+    
+    
+
+     setSingleTodo(filter)
+  }
+
 
   return (
     <>
@@ -74,7 +86,7 @@ export default function PostTodo() {
       </div>
 
       {singleTodo.map((elm, i) => {
-        return <TodoCard key={i} elm={elm} fn={handelToggle} />;
+        return <TodoCard key={i} elm={elm} fn={handelToggle} del={handelDel} />;
       })}
     </>
   );
