@@ -1,0 +1,16 @@
+
+
+.formdiv input{
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px dashed rgb(72, 99, 232);
+}
+.formdiv button{
+    padding: 20px;
+    border: transparent;
+    border-radius: 10px;
+}
+ .formdiv>div>button:hover{
+      cursor: pointer;
+       border: 1px solid black;
+ }
