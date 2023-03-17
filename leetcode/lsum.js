@@ -42,7 +42,4 @@ let n=arr.length
     }
  }
  
-
- for(let i=0;i<arr.length;i++){
-    console.log(arr[i]/i).FixedTo
- }
+console.log(positive,negative,nutral)
