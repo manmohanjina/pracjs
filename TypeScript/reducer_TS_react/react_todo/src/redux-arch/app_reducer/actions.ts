@@ -16,5 +16,12 @@ const dataerr_FN=()=>{
     return {type:types.dataerr}
 }
 
+const login_FN=()=>{
+    return {type:types.login}
+}
 
-export{datareq_FN,datasucc_FN,dataerr_FN}
+const logout_FN=()=>{
+    return {type:types.logout}
+}
+
+export{datareq_FN,datasucc_FN,dataerr_FN,login_FN,logout_FN}

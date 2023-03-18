@@ -38,6 +38,9 @@ export default function User() {
     };
   });
 
+  if(loading){
+    return <h1>...loading</h1>
+  }
    
 
   return (

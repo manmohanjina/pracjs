@@ -6,4 +6,7 @@ const datasucc:string="datasucc";
 
 const dataerr:string="dataerr";
 
-export {dataerr,datareq,datasucc}
+const login:string='userloggedin';
+const logout:string="userlogout"
+
+export {dataerr,datareq,datasucc,login,logout}

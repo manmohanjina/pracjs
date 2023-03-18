@@ -1,4 +1,12 @@
 
+
+export type inistateType={
+    isloading:boolean,
+    data:[],
+    isError:boolean,
+    islogin:boolean,
+    islogout:boolean
+}
 export type resDataar={
     first_name:string,
     last_name:string,
