@@ -1,11 +1,15 @@
 import React from "react";
+import AllRoutes from "./allRoutes/AllRoutes";
 import logo from "./logo.svg";
-import CreateTodo from "./TodoInitalizer/createTodo";
+import Navbar from "./Navbar/Navbar";
+
 
 function App() {
   return (
     <div className="App">
-      <CreateTodo />
+      {/* <CreateTodo /> */}
+      <Navbar/>
+      <AllRoutes/>
     </div>
   );
 }
