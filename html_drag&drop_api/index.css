@@ -1,0 +1,10 @@
+.dragableitem{
+    border:1px solid red;
+    cursor: move;
+}
+
+.dropable span{
+    pointer-events: none;
+
+
+}
