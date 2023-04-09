@@ -1,8 +1,8 @@
-const { log } = require("console");
+
 const { pool } = require("../db/db");
 const bcrypt = require("bcrypt");
 require("dotenv").config();
-
+const jwt = require("jsonwebtoken");
 
 const handelRegisterUserController = (req, res) => {
   try {
@@ -66,22 +66,25 @@ const handelLoginUserController = (req, res) => {
     const values = [email];
     pool.query(q, [values], (err, data) => {
       if (err) return res.status(301).send({ error: "error please try again" });
-      else if (data.length == 0) {
-        return res.status(301).send({ error: "user not registerd " });
+      else if (data.length === 0) {
+        return res.status(301).send({ error: "user not registerd" });
       } else {
-        
-        bcrypt.compare(password, data[0].password,(err,result)=>{
-            console.log(result);
-            console.log(data[0].password, password);
-            res.send("ok");
-        });
-        
+        const pass = bcrypt.compareSync(password, data[0].password);
 
-        // if(!pass){
-        //     return res.status(300).send({"err":"wrong password"})
-        // }
+        if (!pass) {
+          return res.status(300).send({ err: "wrong password" });
+        } else {
+          //creating a token to authenticate the user;
 
-        // res.send('ok')
+          var token = jwt.sign({ userId: data[0].id }, process.env.key);
+          const { password, ...other } = data[0];
+          res
+            .cookie("access_token", token, {
+              httpOnly: true,
+            })
+            .status(200)
+            .send({ other, token });
+        }
       }
     });
   } catch (error) {
@@ -92,6 +95,13 @@ const handelLoginUserController = (req, res) => {
 
 const handleLogoutUserController = (req, res) => {
   try {
+    res
+      .clearCookies("access_token", {
+        sameSite: "none",
+        secure: true,
+      })
+      .status(200)
+      .send({ succ: "user logged out" });
   } catch (error) {
     console.log(error);
     res.status(200).send({ error: "error while logout `/logout`" });
