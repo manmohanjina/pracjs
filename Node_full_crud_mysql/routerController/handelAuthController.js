@@ -83,7 +83,7 @@ const handelLoginUserController = (req, res) => {
               httpOnly: true,
             })
             .status(200)
-            .send({ other, token });
+            .send({ other, token});
         }
       }
     });

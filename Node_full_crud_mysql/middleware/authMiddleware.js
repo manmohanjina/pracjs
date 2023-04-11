@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const validation = (req, res, next) => {
   try {
-    const token = req.headers.authorization;
+    const token = req.cookies.access_token;
     if (token) {
       const decode = jwt.verify(token, process.env.key);
 
@@ -15,6 +15,9 @@ const validation = (req, res, next) => {
       req.body.userId = decode.userId;
 
       next();
+    }
+    else{
+      return res.status(500).send({"error":"login again /mw"})
     }
   } catch (error) {
     console.log(error);
