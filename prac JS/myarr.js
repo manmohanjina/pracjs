@@ -1,15 +1,15 @@
-// const arr = [3, 6, 9, 1, 2, 3, 4, 5, 6];
+ const arr = [3, 6, 9, 1, 2, 3, 4, 5, 6];
 
-// Array.prototype.mymap = function (logic) {
-//   let arr = [];
-//   for (let i = 0; i < this.length; i++) {
-//     arr.push(this[i] ** 2);
-//   }
+Array.prototype.mymap = function (logic) {
+  let arr = [];
+  for (let i = 0; i < this.length; i++) {
+    arr.push(this[i] ** 2);
+  }
 
-//   return arr;
-// };
+  return arr;
+};
 
-// let t = arr.mymap((arr) => arr);
+let t = arr.mymap((arr) => arr);
 
 // //filter
 
@@ -80,7 +80,7 @@
 //   },1);
 // console.log(new_arr);
 
-let arr = [1,2,3,4,5,6];
+// let arr = [1,2,3,4,5,6];
  
 let index=[]
 for(let i=0;i<arr.length;i++){
