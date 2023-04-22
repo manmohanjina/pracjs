@@ -1,4 +1,4 @@
-const { log } = require("console");
+
 const express = require("express");
 const app = express();
 const fs = require("fs");
@@ -7,10 +7,10 @@ app.use(express.json());
 
 app.get("/", (req, res) => {
   let len = fs.readdirSync(folderpath);
-
+  let ans_arr = [];
   const { text } = req.body;
 
-  console.log(text);
+  //console.log(text);
 
   len.forEach((elm, i) => {
     //console.log(elm);
@@ -20,29 +20,39 @@ app.get("/", (req, res) => {
     let arrdata = data.split(" ");
 
     let new_data = arrdata.filter((word) => word === text);
-    if (new_data.length == 0) {
 
-     
+    if(new_data[0]!==undefined){
+      ans_arr.push(new_data[0], i + 1);
     }
-     
-     
-     
-    //   fs.appendFileSync("myfile.txt",JSON.stringify({ "data":new_data[0] ,"pageno":(i+1).toString()}), (err) => {
-    //     if (err) throw err;
-    //     console.log("File created!");
-    //   });
-    
+
+    //  
+
     //
   });
-  res.send("ok")
+//console.log(ans_arr)
+
+let check=[]
+check.push(ans_arr[0])
+ans_arr.filter((elm)=>{
+  if(!isNaN(elm)){
+    check.push(elm)
+  }
+})
+console.log(check)
+fs.appendFileSync("myfile.txt", (`${check}:\t\n`), (err) => {
+      if (err) throw err;
+      console.log("File created!");
+    });
+
+  res.send("ok");
 });
 
 // fs.readFile('path/to/book.txt', 'utf8', (err, data) => {
 //     if (err) throw err;
-    
+
 //     const words = data.split(/\s+/); // split the book contents into an array of words
 //     const wordsCount = {}; // an object to store the word count
-    
+
 //     // loop through the words and count them
 //     for (let i = 0; i < words.length; i++) {
 //       const word = words[i].toLowerCase().replace(/[^a-zA-Z]/g, ''); // convert to lowercase and remove non-alphabetic characters
@@ -51,7 +61,7 @@ app.get("/", (req, res) => {
 //       wordsCount[word].count++; // increment the word count
 //       wordsCount[word].pages.push(Math.floor(i/300)+1); // add the page number (assuming 300 words per page)
 //     }
-  
+
 //     // log the word count and page numbers
 //     for (const word in wordsCount) {
 //       console.log(`${word}: ${wordsCount[word].count} (${wordsCount[word].pages.join(', ')})`);
